@@ -4,7 +4,7 @@ library(naniar)
 library(ggpubr)
 
 # read in climate data
-climate_dat <- read.csv('GLB.Ts+dSST.csv', header = TRUE)
+climate_dat <- read.csv('../GLB.Ts+dSST.csv', header = TRUE)
 climate_dat <- replace_with_na(climate_dat, replace = list(SON = '***',
                                                            MAM = '***',
                                                            DJF = '***',
@@ -15,24 +15,21 @@ jja <- ggplot(climate_dat, aes(x=Year, y=as.double(JJA))) +
   geom_line() +
   geom_point() +
   geom_smooth(method = "loess") +
-  #ggtitle("Global Mean Temperature (1880-2019)") +
   ylab("Mean Temperature Change over JJA") +
   theme_classic()
 
 # line/scatter plot of climate data (Sept-Oct-Nov)
-son <- ggplot(climate_dat, aes(x=Year, y=as.double(SON)))+
+son <- ggplot(climate_dat, aes(x=Year, y=as.numeric(as.character(SON))))+
   geom_line() +
   geom_point() +
   geom_smooth(method = "loess") +
-  #ggtitle("Global Mean Temperature (1880-2019)") +
   ylab("Mean Temperature Change over SON") +
   theme_classic()
 
-djf <- ggplot(climate_dat, aes(x=Year, y=as.double(DJF)))+
+djf <- ggplot(climate_dat, aes(x=Year, y=as.numeric(as.character(DJF))))+
   geom_line() +
   geom_point() +
   geom_smooth(method = "loess") +
-  #ggtitle("Global Mean Temperature (1880-2019)") +
   ylab("Mean Temperature Change over DJF") +
   theme_classic()
 
@@ -40,7 +37,6 @@ mam <- ggplot(climate_dat, aes(x=Year, y=as.double(MAM)))+
   geom_line() +
   geom_point() +
   geom_smooth(method = "loess") +
-  #ggtitle("Global Mean Temperature (1880-2019)") +
   ylab("Mean Temperature Change over MAM") +
   theme_classic()
 
